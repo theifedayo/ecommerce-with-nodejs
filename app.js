@@ -4,12 +4,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expressHbs = require('express-handlebars')
+const dotenv = require('dotenv')
+const connectDB = require('./models/db')
+const cors = require('cors')
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+dotenv.config({path: './config/config.env'})
+
 var app = express();
 
+
+connectDB()
 // view engine setup
 app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs'}))
 app.set('view engine', '.hbs')
