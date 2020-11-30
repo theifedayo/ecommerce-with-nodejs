@@ -11,7 +11,10 @@ exports.home = async (req, res) => {
 				for(var i = 0; i < docs.length; i += rowSize){
 					productsChunk.push(docs.slice(i, i + rowSize))
 				}
-				res.render('index', {products: productsChunk})
+				res.render('shop/index', {products: productsChunk})
+			}else{
+				console.log(err)
+				//process.exit(1)
 			}
 			
 			

@@ -5,8 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expressHbs = require('express-handlebars')
 const dotenv = require('dotenv')
+const session = require('express-session')
 const connectDB = require('./models/db')
 const cors = require('cors')
+const flash = require('connect-flash')
 
 
 
@@ -31,6 +33,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
+
+//Handle express sessions
+app.use(session({
+	secret: process.env.SESSION_SECRET,
+	saveUninitialized: true,
+	resave: true
+}))
+
+app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
