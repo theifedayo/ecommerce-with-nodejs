@@ -13,11 +13,11 @@ router.use(csrfProtection)
 
 exports.getregistration = (req, res)=>{
 	const messages = req.flash('error')
-	res.render('user/signup', {messages: messages, csrfToken: req.csrfToken()})
+	res.render('user/signup', {csrfToken: req.csrfToken()})
 }
 
 
-exports.postregistration = (req, res)=>{
+exports.postregistration = async (req, res)=>{
 	const messages = req.flash('error')
 	//Get values from form
 	const username = req.body.username
@@ -28,11 +28,6 @@ exports.postregistration = (req, res)=>{
 	errors = validationResult(req)
 	if(!errors.isEmpty()){
 		mess = errors.errors
-		// const arr = []
-		// for(var x =0; x < errors.errors.length; x++){
-		// 	mess = errors.errors[x].msg
-		// 	arr.push(mess)
-		// }
 		
 		res.render('user/signup', {
 			errors: errors,
@@ -46,33 +41,53 @@ exports.postregistration = (req, res)=>{
 			mess : mess
 		})
 	}else{
-		const newUser = new User()
+		try{
+			const newUser = new User()
 
-		newUser.username = req.body.username
-		newUser.email = req.body.email
-		newUser.password = req.body.password
+			newUser.username = req.body.username
+			newUser.email = req.body.email
+			newUser.password = req.body.password
 
-		User.createUser(newUser, (err, docs)=>{
-			if(err){
-				throw err
-			}else{
-				console.log(newUser)
-			}
-		})
+			await User.createUser(newUser, (err, docs)=>{
+				if(err){
+					throw err
+				}else{
+					console.log(newUser)
+				}
+			})
+		}catch(err){
+			console.log(err)
+		}
+	
 
 		//success redirect	
-		const messages = req.flash('message', 'Success!!')
+		req.flash('info', 'User created successfully')
+		// const messages = req.flash('message', 'Success!!')
 		res.redirect('/users/login')
 	}
 }
 
 exports.getlogin = (req, res)=>{
-	res.render('login')
+
+	const messages = req.flash('info')
+	const errorMessages = req.flash('error')
+	const logoutMessage = req.flash('info')
+	console.log(errorMessages, 'xxxxxxxxxxxxxx')
+	res.render('user/login', {csrfToken: req.csrfToken(), 
+		messages: messages, 
+		errorMessages: errorMessages,
+		logoutMessage: logoutMessage
+	})
 }
 
 
 exports.getLogout = (req, res)=>{
 	req.logout()
-	// req.flash('success', 'You are logged out')
+	req.flash('info', 'You are logged out')
 	res.redirect('/users/login')
+}
+
+
+exports.getProfile = (req, res)=>{
+	res.render('user/profile')
 }

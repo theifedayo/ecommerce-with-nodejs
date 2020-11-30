@@ -8,6 +8,8 @@ const dotenv = require('dotenv')
 const session = require('express-session')
 const connectDB = require('./models/db')
 const cors = require('cors')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
 const flash = require('connect-flash')
 
 
@@ -42,6 +44,10 @@ app.use(session({
 }))
 
 app.use(flash());
+
+//handle passport
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

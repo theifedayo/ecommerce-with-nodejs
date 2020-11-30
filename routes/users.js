@@ -55,7 +55,7 @@ passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function (err, user) {
       if (err) { return done(err); }
-      if (!user) { return done(null, false); }
+      if (!user) { return done(null, false, {message: 'No user found'}); }
       console.log(user.username)
       User.comparePassword(password, user.password, (err, isMatch)=>{
 		if(err) throw err
@@ -69,14 +69,18 @@ passport.use(new LocalStrategy(
   }
 ));
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/users/login' }), function(req, res){
+router.post('/login', passport.authenticate('local', { failureRedirect: '/users/login', failureFlash: true }), function(req, res){
 	console.log('Authentication successful')
 	req.flash('message', 'Success!!')
-	res.redirect('/staff')
+	res.redirect('/users/profile')
 })
 
 //LOGOUT
 router.get('/logout', user.getLogout)
+
+
+//PROFILE
+router.get('/profile', user.getProfile)
 
 
 
