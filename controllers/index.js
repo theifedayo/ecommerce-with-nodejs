@@ -1,9 +1,10 @@
 const Product = require('../models/products')
+const Cart = require('../models/cart')
 
 
-exports.home = (req, res) => {
+exports.home = async (req, res) => {
 	try{
-		Product.find((err, docs)=>{
+		await Product.find((err, docs)=>{
 			if(!err){
 				// To get 3 products each row
 				const rowSize = 3
@@ -25,8 +26,21 @@ exports.home = (req, res) => {
 	}
 }
 
+exports.cartView = (req, res)=>{
+	const productId = req.params.id
+	const cart = new Cart(req.session.cart ? req.session.cart : {})
 
-
+	Product.findById(productId, (err, product)=>{
+		if(err){
+			return res.redirect('/')
+		}else{
+			cart.add(product, product.id)
+			req.session.cart = cart
+			console.log(req.session.cart)
+			res.redirect('/')
+		}
+	})
+}
 
 
 

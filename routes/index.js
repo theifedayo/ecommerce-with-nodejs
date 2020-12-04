@@ -14,4 +14,6 @@ router.get('/prod-create', index.adminGetCreateView)
 
 router.post('/prod-create', index.adminCreateProduct)
 
+router.get('/add-to-cart/:id', index.cartView)
+
 module.exports = router;
