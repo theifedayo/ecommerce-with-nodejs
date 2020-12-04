@@ -1,0 +1,33 @@
+<div class='cart'>
+{{#if products}}
+    <div class='container'>
+        <h1><center>My Cart</center></h1><br><br>
+        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+          <ul class="list-group">
+            {{# each products}}
+              <li class="list-group-item">
+                <span class="badge">{{ this.qty }}</span>
+                <strong>{{ this.item.name }}</strong>
+                <span class="label label-success">&#8358; {{ this.price }}</span>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+        <br>
+        <td colspan="4"><b>Order Total: </b></td>
+        <td><b>&#8358; {{ session.cart.totalPrice }}</b></td>
+        <div class="form-group row mt-4">
+            <div class="col-sm-10 col-lg-5 mx-auto text-center">
+              <a href="/"><button type="submit" class='btn btn-success btn-sm customised-button color-gold'>Continue shopping</button></a>
+              <a href="/checkout"><button type="submit" class='btn btn-success btn-sm customised-button color-gold'>Proceed to checkout </button></a>
+            </div>
+      </div>
+    </div>
+{{else}}
+    <h3>Cart is empty</h3>
+    <div class="form-group row mt-4">
+            <div class="col-sm-10 col-lg-5 mx-auto text-center">
+              <a href="/"><button type="submit" class='btn btn-success btn-sm customised-button color-gold'>Continue shopping</button></a>
+            </div>
+    </div>
+{{/if}}
