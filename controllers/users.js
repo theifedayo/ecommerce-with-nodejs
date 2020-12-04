@@ -91,3 +91,10 @@ exports.getLogout = (req, res)=>{
 exports.getProfile = (req, res)=>{
 	res.render('user/profile')
 }
+
+exports.ensureAuthenticated = (req, res, next)=>{
+	if(req.isAuthenticated()){
+		return next()
+	}
+	res.redirect('/users/login')
+}

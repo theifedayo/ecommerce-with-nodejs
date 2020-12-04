@@ -3,14 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const expressHbs = require('express-handlebars')
+const Handlebars = require('handlebars')
+const exphbs = require('express-handlebars')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const dotenv = require('dotenv')
 const session = require('express-session')
 const connectDB = require('./models/db')
 const cors = require('cors')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const mongoStore = require('connect-mongo')(session)
 const flash = require('connect-flash')
+const mongoose = require('mongoose')
 
 
 
@@ -24,8 +28,18 @@ var app = express();
 
 connectDB()
 // view engine setup
-app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs'}))
-app.set('view engine', '.hbs')
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+app.engine(
+  '.hbs',
+  exphbs({
+    defaultLayout: 'layout',
+    extname: '.hbs',
+    handlebars: allowInsecurePrototypeAccess(Handlebars)
+  })
+)
+app.set('view engine', 'hbs');
+
 
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'hbs');
@@ -40,7 +54,9 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(session({
 	secret: process.env.SESSION_SECRET,
 	saveUninitialized: true,
-	resave: true
+	resave: true,
+	store: new mongoStore({ mongooseConnection: mongoose.connection }),
+	cookie: { maxAge: 180 * 60 * 1000}
 }))
 
 app.use(flash());
@@ -48,6 +64,11 @@ app.use(flash());
 //handle passport
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.use((req, res, next) => {
+	res.locals.session = req.session;
+	next()
+})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

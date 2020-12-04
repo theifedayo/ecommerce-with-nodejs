@@ -6,15 +6,17 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
     "bcrypt": "^5.0.0",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
-    "express-handlebars": "^5.2.0",
+    "express-handlebars": "^5.1.0",
     "express-messages": "^1.0.1",
     "express-session": "^1.17.1",
     "express-validator": "^6.7.0",

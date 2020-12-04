@@ -1,0 +1,11 @@
+<div class="container">
+	<h3>Add Products!</h3>
+	<form method="POST" autocomplete="off">
+		<input type="hidden" name="_id" value="{{product._id}}">
+		<input type='text' name='name' placeholder='Title' value="{{product.name}}"/><br>
+		<input type='text' name='description' placeholder='Enter description...' value="{{product.description}}"/><br>
+		<input type='text' name='price' placeholder='Enter price...' value="{{product.price}}"/><br>
+		<input type='text' name='imagePath' placeholder='Enter image path...' value="{{product.imagePath}}"/><br>
+		<button type='submit'>Submit</button>
+	</form>
+</div>
