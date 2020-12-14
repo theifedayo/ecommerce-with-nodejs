@@ -51,6 +51,13 @@ exports.cartView = (req, res)=>{
 }
 
 
+exports.getCheckout = (req, res)=>{
+	if(!req.session.cart){
+		return res.redirect('/cart')
+	}
+	var cart = new Cart(req.session.cart)
+	res.render('shop/checkout', {total: cart.totalPrice})
+}
 
 
 

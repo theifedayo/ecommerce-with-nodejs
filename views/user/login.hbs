@@ -2,10 +2,10 @@
 	<div class="container">
 		<h1>Login</h1>
 		{{#if messages }}
-			<div class="alert alert-success" style="width: 30%;">{{ messages }}</div>
+			<div class="alert alert-success">{{ messages }}</div>
 		{{/if}}
 		{{#if errorMessages }}
-			<div class="alert alert-danger" style="width: 30%;">{{ errorMessages }}</div>
+			<div class="alert alert-danger">{{ errorMessages }}</div>
 		{{/if}}
 		<form method="POST" autocomplete="off">
 			<input type='hidden' name='_csrf' value="{{ csrfToken }}"/>

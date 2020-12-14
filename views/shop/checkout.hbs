@@ -1,0 +1,125 @@
+
+ <main >
+    <div class="container wow fadeIn">
+      <div class="container">
+      <h2 class="my-5 h2 text-center">Checkout form</h2>
+      <div class="row">
+        <div class="col-md-8 mb-4">
+          <div class="card">
+            <form method="POST" class="card-body">
+
+              <div class='hideable_shipping_form'>
+
+                <div class="md-form mb-5">
+                    <label for="shipping_address" class=""><b>Name</b></label>
+                    <input type='text' placeholder='' id='username' name='username' class='form-control' required/><br>
+
+                    <label for="shipping_address" class=""><b>Address</b></label>
+                    <input type='text' placeholder='' id='address' name='address' class='form-control' required/><br>
+
+                    <label for="shipping_address" class=""><b>Card Holder Name</b></label>
+                    <input type='text' placeholder='' id='cardHolderName' name='cardHolderName' class='form-control' required/><br>
+
+                    <label for="shipping_address" class=""><b>Card Number</b></label>
+                    <input type='text' placeholder='' id='cardNumber' name='cardNumber' class='form-control' required/>
+                  
+               
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-4 col-md-12 mb-4">
+                    <label for="expiry-month"><b>Expiry Month</b></label>
+                    <input type='text' placeholder='' id='expiryMonth' name='expiryMonth' class='form-control' required/>                    
+                    <div class="invalid-feedback">
+                      Please select a valid country.
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <label for="expriy-year"><b>Expiry Year</b></label>
+                    <input type='text' placeholder='Zip code' id='shipping_zip' name='shipping_zip' class='form-control' required/>
+                    <div class="invalid-feedback">
+                      Zip code required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" name="same_billing_address" id="same_billing_address">
+                  <label class="custom-control-label" for="same_billing_address">Billing address is the same as my shipping address</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" name="set_default_shipping" id="set_default_shipping" required>
+                  <label class="custom-control-label" for="set_default_shipping">Save as default shipping address</label>
+                </div>
+
+              </div>
+
+             
+              
+
+              <hr>
+
+              <h3>Billing address</h3>
+
+              <div class='hideable_billing_form'>
+                <div class="md-form mb-5">
+                  <input type='text' placeholder='1234 Main St' id='billing_address' name='billing_address' class='form-control' required/>
+                  <label for="billing_address" class="">Address</label>
+                </div>
+
+                <div class="md-form mb-5">
+                  <input type='text' placeholder='Apartment or suite' id='billing_address2' name='billing_address2' class='form-control' />
+                  <label for="billing_address2" class="">Address 2 (optional)</label>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-4 col-md-12 mb-4">
+                    <label for="country">Country</label>
+                   
+                    <div class="invalid-feedback">
+                      Please select a valid country.
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <label for="billing_zip">Zip</label>
+                    <input type='text' placeholder='Zip code' id='billing_zip' name='billing_zip' class='form-control' required/>
+                    <div class="invalid-feedback">
+                      Zip code required.
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" name="set_default_billing" id="set_default_billing">
+                  <label class="custom-control-label" for="set_default_billing">Save as default billing address</label>
+                </div>
+
+              </div>
+
+            
+             
+            
+              <hr>
+
+             
+
+              <hr class="mb-4">
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Checkout</button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+          
+        </div>
+
+      </div>
+    </div>
+
+    </div>
+  </main>
