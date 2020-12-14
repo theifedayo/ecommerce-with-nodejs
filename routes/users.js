@@ -14,12 +14,12 @@ const User = require('../models/users')
 const user = require('../controllers/users')
 
 
-//My router middlewares
-router.get('*', (req, res, next)=>{
-  res.locals.login = req.user || null
-  console.log(res.locals.user)
-  next()
-})
+// //My router middlewares
+// router.get('*', (req, res, next)=>{
+//   res.locals.login = req.user || null
+//   console.log(req.user)
+//   next()
+// })
 
 
 

@@ -70,6 +70,12 @@ app.use((req, res, next) => {
 	next()
 })
 
+app.use((req, res, next)=>{
+  res.locals.login = req.user || null
+  console.log(req.user)
+  next()
+})
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
